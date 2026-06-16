@@ -1,4 +1,220 @@
-☕ Cafe Sales Data Analysis Report📋 Project OverviewThis repository contains a comprehensive data analysis pipeline applied to a real-world cafe sales dataset (dirty_cafe_sales.csv). The dataset contains 10,000 transactions across 8 structural columns.  The main objective of this project is to clean a "dirty" dataset, reduce its dimensionality, and uncover hidden purchasing patterns and statistical distributions through advanced visualizations.  🛠️ Pipeline Stages1. Data Preprocessing (Data Cleaning & Imputation)Invalid Value Handling: Identified and replaced invalid string tokens like "ERROR" and "UNKNOWN" with NaN values across all columns.  Type Conversion: Converted features to their correct operational data types (e.g., parsing dates into datetime64 and sales figures into numeric types).  Missing Value Imputation:Imputed numerical columns (Quantity, Price Per Unit, Total Spent) using the Median.  Imputed categorical columns (Item, Payment Method, Location) using the Mode.  Dropped rows with missing Transaction Date values to maintain structural integrity.  Outlier Handling: Implemented the IQR (Interquartile Range) Method to detect and clip outliers in financial sales values.  2. Dimensionality Reduction (PCA)Feature Scaling: Applied StandardScaler to normalize numerical components (Quantity, Price Per Unit, and Total Spent).  Variance Analysis: Evaluated the explained variance ratio across principal components where:PC1: Retained 63.66% of the variance.  PC2: Retained 33.21% of the variance.  Final Reduction: Compressed the feature space from 3 core variables to 2 Principal Components (PC1 & PC2) while retaining 96.87% of the total original information.  3. Exploratory Data Analysis (EDA) & Custom VisualizationsCreated publication-quality, dark-themed figures to examine sales distributions, average transaction thresholds, frequencies, and density variations across different parameters.  💻 Tech Stack & Libraries UsedData Manipulation: pandas, numpy  Data Visualization: matplotlib, seaborn  Machine Learning & Preprocessing: scikit-learn (StandardScaler, PCA)  📊 Dataset StructureThe initial data shape is (10000, 8) containing the following features:  Transaction ID (Categorical/Unique ID)  Item (Categorical)  Quantity (Numerical)  Price Per Unit (Numerical)  Total Spent (Numerical)  Payment Method (Categorical)  Location (Categorical)  Transaction Date (DateTime)  🚀 How to Run the NotebookClone this repository:git clone https://github.com/your-username/cafe-sales-analysis.git2. Install the required dependencies:
-   ```bash
+# ☕ Cafe Sales Data Analysis
+
+A complete data analysis project on a real-world café sales dataset, including:
+
+- Data Cleaning & Preprocessing
+- Exploratory Data Analysis (EDA)
+- Outlier Detection & Handling
+- Principal Component Analysis (PCA)
+- Data Visualization
+- Exporting Cleaned Data & PCA Results
+
+---
+
+## 📌 Project Overview
+
+This project demonstrates an end-to-end data analysis workflow using Python and popular data science libraries.
+
+The dataset contains café sales transactions with intentionally dirty data (missing values, invalid entries, duplicates, and outliers). The notebook cleans the data, explores patterns, reduces dimensionality using PCA, and generates visual insights.
+
+---
+
+## 🛠 Technologies Used
+
+- Python
+- Pandas
+- NumPy
+- Matplotlib
+- Seaborn
+- Scikit-Learn
+
+---
+
+## 📂 Project Structure
+
+```text
+├── data_analysis.ipynb
+├── dirty_cafe_sales.csv
+├── cleaned_cafe_sales.csv
+├── pca_cafe_sales.csv
+├── fig1_distributions.png
+├── fig2_categories.png
+├── fig3_correlation.png
+├── fig4_pca.png
+└── README.md
+```
+
+---
+
+## 🔍 Analysis Workflow
+
+### 1. Data Loading
+
+- Load the café sales dataset.
+- Inspect dataset shape, columns, and missing values.
+
+### 2. Data Cleaning
+
+#### Invalid Values
+Replace invalid entries such as:
+
+```python
+ERROR
+UNKNOWN
+```
+
+with missing values (`NaN`).
+
+#### Data Type Conversion
+
+Convert:
+
+- Transaction Date → Datetime
+- Quantity → Numeric
+- Price Per Unit → Numeric
+- Total Spent → Numeric
+
+#### Duplicate Removal
+
+Remove duplicate records and reset indexing.
+
+#### Missing Value Handling
+
+- Numeric columns → Filled using median values.
+- Categorical columns → Filled using mode values.
+
+#### Outlier Treatment
+
+Use the **Interquartile Range (IQR)** method to identify and cap outliers.
+
+---
+
+### 3. Principal Component Analysis (PCA)
+
+#### Feature Scaling
+
+The following features are standardized:
+
+- Quantity
+- Price Per Unit
+- Total Spent
+
+using:
+
+```python
+StandardScaler()
+```
+
+#### Dimensionality Reduction
+
+PCA is applied to reduce the dataset into:
+
+```python
+n_components = 2
+```
+
+Resulting components:
+
+- PC1
+- PC2
+
+---
+
+### 4. Data Visualization
+
+The project generates four visual reports:
+
+#### 📊 Figure 1 – Sales Distribution
+
+Shows distributions for:
+
+- Total Spent
+- Quantity
+- Price Per Unit
+
+#### 📈 Figure 2 – Sales by Category
+
+Visualizes:
+
+- Sales by Item
+- Sales by Payment Method
+
+#### 🔥 Figure 3 – Correlation Matrix
+
+Heatmap showing correlations between numerical features.
+
+#### 🧠 Figure 4 – PCA Analysis
+
+Includes:
+
+- Scree Plot
+- PCA Scatter Plot
+
+---
+
+## 📤 Outputs
+
+The notebook exports:
+
+### Cleaned Dataset
+
+```text
+cleaned_cafe_sales.csv
+```
+
+### PCA Dataset
+
+```text
+pca_cafe_sales.csv
+```
+
+containing:
+
+```text
+PC1
+PC2
+Location
+Payment Method
+Item
+```
+
+---
+
+## ▶️ How to Run
+
+### Install Dependencies
+
+```bash
 pip install pandas numpy matplotlib seaborn scikit-learn
-Open the Jupyter Notebook / Google Colab and run all cells.  Make sure to upload your dataset dirty_cafe_sales.csv when prompted by the upload widget.  📈 Key Visuals GeneratedThe pipeline automatically saves optimized analytical charts such as:fig1_distributions.png: Multi-plot subplots demonstrating values, means, and total counts for spent quantities and item metrics.  Developed as part of my Data Science & Analytics Portfolio.
+```
+
+### Run the Notebook
+
+```bash
+jupyter notebook data_analysis.ipynb
+```
+
+or
+
+```bash
+jupyter lab
+```
+
+---
+
+## 📊 Key Skills Demonstrated
+
+- Data Cleaning
+- Data Wrangling
+- Feature Engineering
+- Exploratory Data Analysis
+- Statistical Analysis
+- PCA
+- Data Visualization
+- Data Export & Reporting
+
+---
+
+## 👨‍💻 Author
+
+Developed as a Data Analysis project demonstrating practical data preprocessing, visualization, and dimensionality reduction techniques using Python.
